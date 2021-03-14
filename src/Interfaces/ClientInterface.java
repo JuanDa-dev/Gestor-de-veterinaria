@@ -27,7 +27,7 @@ public class ClientInterface extends javax.swing.JFrame {
     File cliente;
     File cita;
     File agenda;
-    
+
     public ClientInterface() {
         initComponents();
         centreWindow();
@@ -50,12 +50,12 @@ public class ClientInterface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        SolitudCita = new javax.swing.JFrame();
+        SolicitudCita = new javax.swing.JFrame();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        solicitarCita = new javax.swing.JButton();
-        ModicarCita = new javax.swing.JFrame();
+        SolicitarCita = new javax.swing.JButton();
+        ModificarCita = new javax.swing.JFrame();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -63,6 +63,8 @@ public class ClientInterface extends javax.swing.JFrame {
         buscar = new javax.swing.JTextField();
         cancelarCita = new javax.swing.JButton();
         guardarCambios = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         content = new javax.swing.JPanel();
         reg_title = new javax.swing.JLabel();
         requestQuoteButton = new javax.swing.JButton();
@@ -83,8 +85,11 @@ public class ClientInterface extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
+        SolicitudCita.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        SolicitudCita.setSize(new java.awt.Dimension(460, 312));
+
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel9.setText("Tabla de Solicitud de Citas");
+        jLabel9.setText("Tabla de Servicios");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,43 +114,52 @@ public class ClientInterface extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable1MouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
-        solicitarCita.setText("Solicitar Cita");
-        solicitarCita.addActionListener(new java.awt.event.ActionListener() {
+        SolicitarCita.setText("Solicitar Cita");
+        SolicitarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                solicitarCitaActionPerformed(evt);
+                SolicitarCitaActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout SolitudCitaLayout = new javax.swing.GroupLayout(SolitudCita.getContentPane());
-        SolitudCita.getContentPane().setLayout(SolitudCitaLayout);
-        SolitudCitaLayout.setHorizontalGroup(
-            SolitudCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SolitudCitaLayout.createSequentialGroup()
-                .addGroup(SolitudCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SolitudCitaLayout.createSequentialGroup()
+        javax.swing.GroupLayout SolicitudCitaLayout = new javax.swing.GroupLayout(SolicitudCita.getContentPane());
+        SolicitudCita.getContentPane().setLayout(SolicitudCitaLayout);
+        SolicitudCitaLayout.setHorizontalGroup(
+            SolicitudCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SolicitudCitaLayout.createSequentialGroup()
+                .addGap(0, 33, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
+            .addGroup(SolicitudCitaLayout.createSequentialGroup()
+                .addGroup(SolicitudCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SolicitudCitaLayout.createSequentialGroup()
                         .addGap(150, 150, 150)
                         .addComponent(jLabel9))
-                    .addGroup(SolitudCitaLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(SolitudCitaLayout.createSequentialGroup()
-                        .addGap(176, 176, 176)
-                        .addComponent(solicitarCita)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                    .addGroup(SolicitudCitaLayout.createSequentialGroup()
+                        .addGap(170, 170, 170)
+                        .addComponent(SolicitarCita, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        SolitudCitaLayout.setVerticalGroup(
-            SolitudCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SolitudCitaLayout.createSequentialGroup()
+        SolicitudCitaLayout.setVerticalGroup(
+            SolicitudCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SolicitudCitaLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel9)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(solicitarCita)
-                .addGap(24, 24, 24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(SolicitarCita)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        ModificarCita.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        ModificarCita.setSize(new java.awt.Dimension(513, 312));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Tabla de Cancelación/Modificacion de Citas");
@@ -155,14 +169,14 @@ public class ClientInterface extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Cedula del Dueño", "Nombre del Perro", "Servicio", "Estado"
+                "Fecha Consulta", "Cedula del Dueño", "Nombre del Perro", "Servicio", "Hora", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, true, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -174,6 +188,14 @@ public class ClientInterface extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
+            jTable2.getColumnModel().getColumn(1).setResizable(false);
+            jTable2.getColumnModel().getColumn(2).setResizable(false);
+            jTable2.getColumnModel().getColumn(3).setResizable(false);
+            jTable2.getColumnModel().getColumn(4).setResizable(false);
+            jTable2.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         jLabel12.setText("Cedula:");
 
@@ -197,47 +219,60 @@ public class ClientInterface extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout ModicarCitaLayout = new javax.swing.GroupLayout(ModicarCita.getContentPane());
-        ModicarCita.getContentPane().setLayout(ModicarCitaLayout);
-        ModicarCitaLayout.setHorizontalGroup(
-            ModicarCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ModicarCitaLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(ModicarCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(ModicarCitaLayout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cancelarCita)
-                        .addGap(18, 18, 18)
-                        .addComponent(guardarCambios)))
-                .addContainerGap(31, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ModicarCitaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel11)
-                .addGap(109, 109, 109))
+        jButton1.setText("Cambiar Servicio");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Para cambiar un servicion, primero debe seleccionar una cita en la tabla.");
+
+        javax.swing.GroupLayout ModificarCitaLayout = new javax.swing.GroupLayout(ModificarCita.getContentPane());
+        ModificarCita.getContentPane().setLayout(ModificarCitaLayout);
+        ModificarCitaLayout.setHorizontalGroup(
+            ModificarCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ModificarCitaLayout.createSequentialGroup()
+                .addGroup(ModificarCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ModificarCitaLayout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(jLabel11))
+                    .addGroup(ModificarCitaLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ModificarCitaLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(ModificarCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(ModificarCitaLayout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cancelarCita)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(guardarCambios)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1)))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
-        ModicarCitaLayout.setVerticalGroup(
-            ModicarCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ModicarCitaLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+        ModificarCitaLayout.setVerticalGroup(
+            ModificarCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ModificarCitaLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(ModicarCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ModicarCitaLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(ModicarCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(ModicarCitaLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(ModicarCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(guardarCambios)
-                            .addComponent(cancelarCita))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(ModificarCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelarCita)
+                    .addComponent(guardarCambios)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -365,7 +400,7 @@ public class ClientInterface extends javax.swing.JFrame {
             String mes = Integer.toString(fecha.getCalendar().get(Calendar.MONTH + 1));//Recupera el mes de la tabla
             String año = Integer.toString(fecha.getCalendar().get(Calendar.YEAR));//Recupera el año de la tabla
             //SACAR LA INFORMACION DE TEXTFIELD
-            int ced = Integer.parseInt(cedula.getText());
+            String ced = cedula.getText();
             String nombre = nombrePerro.getText();
             String razaPerro = raza.getText();
             String colorPerro = color.getText();
@@ -374,7 +409,9 @@ public class ClientInterface extends javax.swing.JFrame {
             //Escribo la informacion en el archivo
             try (FileWriter fw = new FileWriter(cliente.getAbsolutePath(), true)) {
                 BufferedWriter bw = new BufferedWriter(fw);//Creo el buffered
-                bw.write(ced + "," + nombre + "," + razaPerro + "," + colorPerro + "," + date);
+                if (!CitaRepetida(cliente, ced, nombre)) {
+                    bw.write(ced + "," + nombre + "," + razaPerro + "," + colorPerro + "," + date);
+                }
                 bw.newLine();
                 bw.flush();
                 bw.close();
@@ -386,14 +423,64 @@ public class ClientInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_registryButtonActionPerformed
 
     private void requestQuoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestQuoteButtonActionPerformed
-        // TODO add your handling code here:
+        ModificarCita.dispose();
+        SolicitudCita.setVisible(true);
     }//GEN-LAST:event_requestQuoteButtonActionPerformed
 
     private void modifyQuoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyQuoteButtonActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        SolicitudCita.dispose();
+        ModificarCita.setVisible(true);
     }//GEN-LAST:event_modifyQuoteButtonActionPerformed
 
-    private void solicitarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solicitarCitaActionPerformed
+    private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        save(model);//Guardo la informacion en el archivo
+    }//GEN-LAST:event_guardarCambiosActionPerformed
+
+    private void cancelarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCitaActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        int selected = (int) jTable2.getSelectedRow();
+        model.setValueAt("Cancelada", selected, 5);
+    }//GEN-LAST:event_cancelarCitaActionPerformed
+
+    private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);//Borro los registros
+        if (Esnumero(buscar.getText()) && !buscar.getText().isEmpty()) {//Reviso que ingrese un numero o que la cadena no este vacia
+            File archivo = new File("C:\\user\\AgendaAdmin.txt");
+            try (Scanner sc = new Scanner(archivo)) {//Abro el archivo
+                while (sc.hasNextLine()) {//mientras halla una siguiente linea
+                    String linea = sc.nextLine();
+                    String data[] = linea.split(",");
+                    String date = data[0];
+                    String ced = data[1];
+                    String nombre = data[2];
+                    String servicio = data[3];
+                    String hora = data[4];
+                    String estado = data[5];
+                    if (ced.equals(buscar.getText())) {//si encuentro coincidencias, muestra los datos en la tabla
+                        model.addRow(new Object[]{date, ced, nombre, servicio, hora, estado});//Muestro los datos de esa cedula
+                    }
+                }
+                sc.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            model.setRowCount(0);//Borro otra vez los registros
+        }
+    }//GEN-LAST:event_buscarKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jTable2.getSelectedRow() > -1) {
+            SolicitarCita.setEnabled(false);
+            SolicitarCita.setVisible(false);
+            SolicitudCita.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void SolicitarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SolicitarCitaActionPerformed
         int selected = jTable1.getSelectedRow();
         if (selected > -1) {
             String data[] = {nombrePerro.getText(), raza.getText(), color.getText(), String.valueOf(fecha.getCalendar().get(Calendar.DATE))};
@@ -416,7 +503,7 @@ public class ClientInterface extends javax.swing.JFrame {
                 }
 
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                String serv = (String) model.getValueAt(jTable1.getSelectedRow(), 0);//Recupero el sevicio que selecciono
+                String serv = (String) model.getValueAt(selected, 0);//Recupero el sevicio que selecciono
                 String ced = cedula.getText();
                 String nombre = nombrePerro.getText();
                 String estado = "Solicitada";
@@ -424,7 +511,7 @@ public class ClientInterface extends javax.swing.JFrame {
 
                 try (FileWriter fw = new FileWriter(cita.getAbsolutePath(), true)) {
                     BufferedWriter bw = new BufferedWriter(fw);
-                    if (!CitaRepetida(cliente, ced, nombre)) {
+                    if (!CitaRepetida(cita, ced, nombre)) {
                         bw.write(ced + "," + nombre + "," + serv + "," + estado);
                     }
                     bw.newLine();
@@ -436,45 +523,17 @@ public class ClientInterface extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_solicitarCitaActionPerformed
+    }//GEN-LAST:event_SolicitarCitaActionPerformed
 
-    private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        model.setRowCount(0);//Borro los registros
-        String cadena[] = {buscar.getText()};
-        if (Esnumero(buscar.getText()) && NoVacia(cadena)) {//Reviso que ingrese un numero o que la cadena no este vacia
-            File archivo = new File("C:\\user\\Citas.txt");
-            try (Scanner sc = new Scanner(archivo)) {//Abro el archivo
-                while (sc.hasNextLine()) {//mientras halla una siguiente linea
-                    String linea = sc.nextLine();
-                    String data[] = linea.split(",");
-                    String ced = data[0];
-                    String nombre = data[1];
-                    String servicio = data[2];
-                    String estado = data[3];
-                    if (ced.contains(buscar.getText())) {//si encuentro coincidencias, muestra los datos en la tabla
-                        model.addRow(new Object[]{ced, nombre, servicio, estado});//Muestro los datos de esa cedula
-                    }
-                }
-                sc.close();
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            model.setRowCount(0);//Borro otra vez los registros
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();//Tabla de cancelacion de citas
+        DefaultTableModel model2 = (DefaultTableModel) jTable1.getModel();//Tabla de servicios
+        int selectedServicios = jTable1.getSelectedRow();//Servicio seleccionado
+        int selectedCitas = jTable2.getSelectedRow();//Cita seleccionada
+        if(jTable1.getSelectedRow() > -1){
+            model.setValueAt(model2.getValueAt(selectedServicios, 0), selectedCitas, 3);
         }
-    }//GEN-LAST:event_buscarKeyReleased
-
-    private void cancelarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCitaActionPerformed
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        int selected = (int) jTable2.getSelectedRow();
-        model.setValueAt("Cancelada", selected, 3);
-    }//GEN-LAST:event_cancelarCitaActionPerformed
-
-    private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        save(model);//Guardo la informacion en el archivo
-    }//GEN-LAST:event_guardarCambiosActionPerformed
+    }//GEN-LAST:event_jTable1MouseReleased
 
     //Valido que la cedula que ingresan sea numerico
     private boolean Esnumero(String cadena) {
@@ -517,6 +576,7 @@ public class ClientInterface extends javax.swing.JFrame {
                     return true;
                 }
             }
+            sc.close();
             return false;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
@@ -558,8 +618,9 @@ public class ClientInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFrame ModicarCita;
-    private javax.swing.JFrame SolitudCita;
+    private javax.swing.JFrame ModificarCita;
+    private javax.swing.JButton SolicitarCita;
+    private javax.swing.JFrame SolicitudCita;
     private javax.swing.JTextField buscar;
     private javax.swing.JButton cancelarCita;
     private javax.swing.JTextField cedula;
@@ -567,9 +628,11 @@ public class ClientInterface extends javax.swing.JFrame {
     private javax.swing.JPanel content;
     private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JButton guardarCambios;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -588,13 +651,77 @@ public class ClientInterface extends javax.swing.JFrame {
     private javax.swing.JButton registryButton;
     private javax.swing.JButton requestQuoteButton;
     private javax.swing.JLabel showName;
-    private javax.swing.JButton solicitarCita;
     private javax.swing.JLabel tittle;
     // End of variables declaration//GEN-END:variables
 
     //Actualizo los datos
-    private void save(DefaultTableModel model){
-        
+    private void save(DefaultTableModel model) {
+        String direccion = "C:\\user";
+        File f = new File(direccion);
+        String dir = "C:\\user";
+        String nameFile = "Cambios.txt";
+        File archivo = new File(dir, nameFile);
+        agenda = new File("C:\\user\\Agenda.txt");
+
+        if (!archivo.exists()) {
+            f.mkdir();
+            try {
+                archivo.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        try (FileWriter fw = new FileWriter(archivo.getAbsoluteFile())) {
+            BufferedWriter bw = new BufferedWriter(fw);
+            Scanner sc = new Scanner(agenda);
+            while (sc.hasNextLine()) {
+                String linea = sc.nextLine();
+                String data[] = linea.split(",");
+                String date = data[0];
+                String ced = data[1];
+                String nombre = data[2];
+                String servicio = data[3];
+                String hora = data[4];
+                String estado = data[5];
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    if (model.getValueAt(i, 0).equals(ced) && model.getValueAt(i, 1).equals(nombre)) {
+                        ced = (String) model.getValueAt(i, 0);
+                        nombre = (String) model.getValueAt(i, 1);
+                        servicio = (String) model.getValueAt(i, 2);
+                        date = (String) model.getValueAt(i, 3);
+                        hora = (String) model.getValueAt(i, 4);
+                        estado = (String) model.getValueAt(i, 5);
+                    }
+                }
+                bw.write(date + "," + ced + "," + nombre + "," + servicio + "," + hora + "," + estado);
+                bw.newLine();
+            }
+            bw.flush();
+            bw.close();
+            fw.close();
+            sc.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try (FileWriter fw = new FileWriter(agenda.getAbsoluteFile())) {
+            BufferedWriter bw = new BufferedWriter(fw);
+            Scanner sc = new Scanner(archivo);
+            while (sc.hasNextLine()) {
+                String linea = sc.nextLine();
+                String data[] = linea.split(",");
+                bw.write(data[0] + "," + data[1] + "," + data[2] + "," + data[3] + "," + data[4] + "," + data[5]);
+                bw.newLine();
+            }
+            bw.flush();
+            bw.close();
+            fw.close();
+            sc.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        archivo.delete();
     }
 
 }

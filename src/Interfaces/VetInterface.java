@@ -244,7 +244,7 @@ public class VetInterface extends javax.swing.JFrame {
 
     private void consultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultButtonActionPerformed
         Agenda.setVisible(true);
-        File file = new File("C:\\user\\Agenda.txt");
+        File file = new File("C:\\user\\AgendaAdmin.txt");
         if (file.exists()) {
             DefaultTableModel model = (DefaultTableModel) dataTable.getModel();
             try (Scanner sc = new Scanner(file)) {
