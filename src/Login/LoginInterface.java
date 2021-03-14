@@ -129,7 +129,7 @@ public class LoginInterface extends javax.swing.JFrame {
     private void singInbuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_singInbuttonMouseClicked
         String nombre = nameText.getText();
         int key = Integer.parseInt(keyText.getText());
-        if (user.equals("Cliente") && nombre.equals("Mario") && key == 1429) {//Usuario y clave para el modulo cliente
+        if (user.equals("Cliente")) {//Usuario y clave para el modulo cliente
             new ClientInterface().setVisible(true);
             this.dispose();
         } else if (user.equals("Veterinario") && nombre.equals("David") && key == 1110) {//Usuario y clave para el modulo veterinario
@@ -139,7 +139,7 @@ public class LoginInterface extends javax.swing.JFrame {
             new AdminInterface().setVisible(true);
             this.dispose();
         }else{
-            JOptionPane.showMessageDialog(cardContent,"Error" ,"Usuario o contraseña incorrectos, digite nuevamente",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Error, Usuario o contraseña incorrectos, digite nuevamente");
         }
     }//GEN-LAST:event_singInbuttonMouseClicked
 

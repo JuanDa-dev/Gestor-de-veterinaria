@@ -1,5 +1,6 @@
 package Login;
 
+import Interfaces.ClientInterface;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -90,7 +91,7 @@ public class Start extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void clientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientButtonActionPerformed
-        new LoginInterface("Cliente").setVisible(true);
+        new ClientInterface().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_clientButtonActionPerformed
 
