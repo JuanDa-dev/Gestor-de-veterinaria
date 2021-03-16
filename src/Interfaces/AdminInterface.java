@@ -82,7 +82,7 @@ public class AdminInterface extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         buscar = new javax.swing.JTextField();
 
-        AgendaAdmin.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        AgendaAdmin.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         AgendaAdmin.setTitle("Agenda de Citas");
         AgendaAdmin.setLocation(new java.awt.Point(150, 100));
         AgendaAdmin.setSize(new java.awt.Dimension(735, 430));
@@ -210,7 +210,7 @@ public class AdminInterface extends javax.swing.JFrame {
             .addComponent(cardcontent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        AsignQuotes.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        AsignQuotes.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         AsignQuotes.setTitle("Re Asignar Cita");
         AsignQuotes.setMinimumSize(new java.awt.Dimension(360, 400));
 
@@ -472,7 +472,7 @@ public class AdminInterface extends javax.swing.JFrame {
                 while (sc.hasNextLine()) {
                     String linea = sc.nextLine();
                     String data[] = linea.split(",");
-                    model.addRow(new Object[]{data[0], data[1], data[2], data[3], data[4]});
+                    model.addRow(new Object[]{data[0], data[1], data[2], data[3], data[4], data[5]});
                 }
                 sc.close();
             } catch (FileNotFoundException ex) {
@@ -501,48 +501,46 @@ public class AdminInterface extends javax.swing.JFrame {
         int costo = 0;
         if (Esnumero(buscar.getText()) && !buscar.getText().isEmpty()) {//Reviso que ingrese un numero o que la cadena no este vacia
             File archivo = new File("C:\\user\\AgendaAdmin.txt");
-            if (archivo.exists()) {
-                try (Scanner sc = new Scanner(archivo)) {//Abro el archivo
-                    while (sc.hasNextLine()) {//mientras halla una siguiente linea
-                        String linea = sc.nextLine();
-                        String data[] = linea.split(",");
-                        String fecha = data[0];
-                        String cedula = data[1];
-                        String nombrePerro = data[2];
-                        String servicio = data[3];
-                        switch (servicio) {
-                            case "Consulta":
-                                costo = 60000;
-                                break;
-                            case "Control":
-                                costo = 10000;
-                                break;
-                            case "Desparasitación":
-                                costo = 40000;
-                                break;
-                            case "Vacunación":
-                                costo = 35000;
-                                break;
-                            case "Guarderia":
-                                costo = 35000;
-                                break;
-                            case "Radiologia":
-                                costo = 100000;
-                                break;
-                            case "Baño":
-                                costo = 25000;
-                                break;
-                        }
-                        String estado = data[5];
-                        if (cedula.contains(buscar.getText()) && estado.equals("Finalizada")) {//si encuentro coincidencias, muestra los datos en la tabla
-                            model.addRow(new Object[]{fecha, cedula, nombrePerro, servicio, costo});//Muestro los datos de esa cedula
-                            total += costo;
-                        }
+            try (Scanner sc = new Scanner(archivo)) {//Abro el archivo
+                while (sc.hasNextLine()) {//mientras halla una siguiente linea
+                    String linea = sc.nextLine();
+                    String data[] = linea.split(",");
+                    String fecha = data[0];
+                    String cedula = data[1];
+                    String nombrePerro = data[2];
+                    String servicio = data[3];
+                    switch (servicio) {
+                        case "Consulta":
+                            costo = 60000;
+                            break;
+                        case "Control":
+                            costo = 10000;
+                            break;
+                        case "Desparasitación":
+                            costo = 40000;
+                            break;
+                        case "Vacunación":
+                            costo = 35000;
+                            break;
+                        case "Guarderia":
+                            costo = 35000;
+                            break;
+                        case "Radiologia":
+                            costo = 100000;
+                            break;
+                        case "Baño":
+                            costo = 25000;
+                            break;
                     }
-                    sc.close();
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
+                    String estado = data[5];
+                    if (cedula.contains(buscar.getText()) && estado.equals("Finalizada")) {//si encuentro coincidencias, muestra los datos en la tabla
+                        model.addRow(new Object[]{fecha, cedula, nombrePerro, servicio, costo});//Muestro los datos de esa cedula
+                        total += costo;
+                    }
                 }
+                sc.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             model.setRowCount(0);//Borro otra vez los registros
@@ -561,7 +559,7 @@ public class AdminInterface extends javax.swing.JFrame {
 
     private void reAsignButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reAsignButtonActionPerformed
         int selected = jTable2.getSelectedRow();
-        if (selected > -1) {
+        if (selected > -1 && !jTextField1.getText().equals("")) {
             //Datos para crear el archivo de Clientes
             String sDir = "C:\\user"; // direccion
             File f = new File(sDir); // instancia de la carpeta
@@ -588,14 +586,15 @@ public class AdminInterface extends javax.swing.JFrame {
             String date = DateFormat.getDateInstance().format(bornDateCollecter.getDate());
             String estado = "Asignada";
             String hora = jTextField1.getText();
+            Guardar();
 
             //Escribo la informacion en el archivo
             try (FileWriter fw = new FileWriter(agenda.getAbsolutePath(), true)) {
                 BufferedWriter bw = new BufferedWriter(fw);//Creo el buffered
                 if (!CitaRepetida(agenda, ced, nombre)) {
                     bw.write(date + "," + ced + "," + nombre + "," + servicio + "," + hora + "," + estado);
+                    bw.newLine();
                 }
-                bw.newLine();
                 bw.flush();
                 bw.close();
                 fw.close();
@@ -604,7 +603,7 @@ public class AdminInterface extends javax.swing.JFrame {
             }
         }
         this.dispose();
-        AgendaAdmin.setVisible(true);
+        jTextField1.setText("");
     }//GEN-LAST:event_reAsignButtonActionPerformed
 
     private void asignQuoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignQuoteButtonActionPerformed
@@ -612,23 +611,21 @@ public class AdminInterface extends javax.swing.JFrame {
         AsignQuotes.setVisible(true);
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         File cita = new File("C:\\user\\Citas.txt");
-        if (cita.exists()) {
-            try (Scanner sc = new Scanner(cita)) {
-                while (sc.hasNextLine()) {
-                    String linea = sc.nextLine();
-                    String datos[] = linea.split(",");
-                    String cedula = datos[0];
-                    String nombre = datos[1];
-                    String servicio = datos[2];
-                    String estado = datos[3];
-                    if (!estado.equals("Cancelada")) {
-                        model.addRow(new Object[]{cedula,nombre,servicio,estado});
-                    }
+        try (Scanner sc = new Scanner(cita)) {
+            while (sc.hasNextLine()) {
+                String linea = sc.nextLine();
+                String datos[] = linea.split(",");
+                String cedula = datos[0];
+                String nombre = datos[1];
+                String servicio = datos[2];
+                String estado = datos[3];
+                if (!estado.equals("Cancelada")) {
+                    model.addRow(new Object[]{cedula, nombre, servicio, estado});
                 }
-                sc.close();
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
+            sc.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_asignQuoteButtonActionPerformed
 
@@ -662,29 +659,43 @@ public class AdminInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int Dia, DiaActual;
-        String nombreDia;
-        try {
-            Dia = bornDateCollecter.getCalendar().get(Calendar.DAY_OF_MONTH);
-            DiaActual = LocalDate.now().getDayOfMonth();
-            if (Dia > DiaActual) {
-                nombreDia = String.valueOf(bornDateCollecter.getDate()).substring(0, 3);
-                if (nombreDia.equals("Sat") || nombreDia.equals("Sun")) {//Si el dia es sabado o domingo el veterinario no atiende esos 2 dias
-                    JOptionPane.showMessageDialog(null, "El Veterinario no atiende los dias sabados ni domingos");
-                } else {
-                    if(!AsignarHora(String.valueOf(Dia), "08", "00", "am").equals("")){
-                        jTextField1.setText(AsignarHora(String.valueOf(Dia), "08", "00", "am"));
-                        reAsignButton.setEnabled(true);
-                    }else{
-                        JOptionPane.showMessageDialog(null, "No hay horario disponible para ese dia, ingrese otro dia");
-                        reAsignButton.setEnabled(false);
-                    }
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Tiene que ingresar un dia mayor al actual");
+        int selected = jTable2.getSelectedRow();
+        if (selected > -1) {
+            int Dia = 0, DiaActual = 0;
+            String nombreDia, date = null;
+            boolean pass = true;
+            try {
+                Dia = bornDateCollecter.getCalendar().get(Calendar.DAY_OF_MONTH);
+                date = DateFormat.getDateInstance().format(bornDateCollecter.getDate());
+                DiaActual = LocalDate.now().getDayOfMonth();
+                pass = true;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Verifique si coloco una fecha");
+                pass = false;
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Verifique si coloco una fecha");
+            if (pass) {
+                if (Dia > DiaActual) {
+                    nombreDia = String.valueOf(bornDateCollecter.getDate()).substring(0, 3);
+                    if (nombreDia.equals("Sat") || nombreDia.equals("Sun")) {//Si el dia es sabado o domingo el veterinario no atiende esos 2 dias
+                        JOptionPane.showMessageDialog(null, "El Veterinario no atiende los dias sabados ni domingos");
+                    } else {
+                        String h = AsignarHora(date, "08", "00", "am", selected);
+                        if (!h.equals("") && !h.equals(null)) {
+                            jTextField1.setText(h);
+                            reAsignButton.setEnabled(true);
+                        } else if (h.equals("")) {
+                            JOptionPane.showMessageDialog(null, "No hay horario disponible para ese dia, ingrese otro dia");
+                            reAsignButton.setEnabled(false);
+                        } else {
+                            jTextField1.setText("No necesita");
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Tiene que ingresar un dia mayor al actual");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Tiene que seleccionar una cita");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
     private boolean CitaRepetida(File archivo, String cedula, String nombre) {
@@ -775,75 +786,78 @@ public class AdminInterface extends javax.swing.JFrame {
     private javax.swing.JPanel title;
     // End of variables declaration//GEN-END:variables
 
-    private String AsignarHora(String dia, String hora, String minuto, String horario) {
-        File agenda = new File("C:\\user\\AgendaAdmin.txt");
-        String servicio = "";
-        if (agenda.exists()) {
-            try (Scanner sc = new Scanner(agenda)) {
-                boolean igual = false;
-                while (sc.hasNextLine() && !igual) {
-                    String linea = sc.nextLine();
-                    String datos[] = linea.split(",");
-                    String day = datos[0].substring(0, 2);
-                    String hour = datos[4];
-                    servicio = datos[3];
-                    if (dia.equals(day)) {
-                        if (hora.equals(hour)) {
-                            igual = true;
-                        } else {
-                            return hora + ":" + minuto + " " + horario;
-                        }
-                    } else {
-                        return hora + ":" + minuto + " " + horario;
-                    }
-                }
-                sc.close();
-                switch (servicio) {
-                    case "Consulta":
-                    case "Radiologia":
-                        if (Integer.parseInt(hora) + 1 < 13) {
-                            if (Integer.parseInt(hora) + 1 == 12) {
-                                horario = "pm";
-                            }
-                            AsignarHora(dia, String.valueOf(Integer.parseInt(hora) + 1), minuto, horario);
-                        } else if (Integer.parseInt(hora) + 1 == 13) {
-                            AsignarHora(dia, String.valueOf(Integer.parseInt(hora) + 2), minuto, horario);
-                        } else if (Integer.parseInt(hora) + 1 < 18) {
-                            AsignarHora(dia, String.valueOf(Integer.parseInt(hora) + 1), minuto, horario);
-                        } else if (Integer.parseInt(hora) + 1 == 18) {
-                            return "";
-                        }
-                        break;
-                    case "Control":
-                    case "Desparasitación":
-                    case "Vacunación":
-                        if (Integer.parseInt(minuto) == 30) {
-                            hora = String.valueOf(Integer.parseInt(hora) + 1);
-                            minuto = "00";
-                        } else {
-                            minuto = "30";
-                        }
-                        if (Integer.parseInt(hora) < 13) {
-                            if (Integer.parseInt(hora) == 12) {
-                                horario = "pm";
-                            }
-                            AsignarHora(dia, hora, minuto, horario);
-                        } else if (Integer.parseInt(hora) + 1 == 13) {
-                            AsignarHora(dia, String.valueOf(Integer.parseInt(hora) + 1), minuto, horario);
-                        } else if (Integer.parseInt(hora) + 1 < 18) {
-                            AsignarHora(dia, hora, minuto, horario);
-                        } else if (Integer.parseInt(hora) + 1 == 18) {
-                            return "";
-                        }
-                        break;
-                    default:
-                        return "No necesita";
-                }
-            } catch (FileNotFoundException ex) {
+    //Guardo en el archivo citas
+    private void Guardar() {
+        int selected = jTable2.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.removeRow(selected);
+        //Creo las variables para el archivo agenda
+        String direccion = "C:\\user";
+        File f = new File(direccion);
+        String dir = "C:\\user";
+        String nameFile = "Citas.txt";
+        File cita = new File(dir, nameFile);
+
+        //Reviso que no exista el archivo cita para crearlo
+        if (!cita.exists()) {
+            try {
+                f.mkdir();
+                cita.createNewFile();
+            } catch (IOException ex) {
                 Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return hora+":"+minuto+" "+horario;
+
+        try (FileWriter fw = new FileWriter(cita.getAbsoluteFile())) {
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (int i = 0; i < model.getRowCount(); i++) {
+                bw.write(model.getValueAt(i, 0) + "," + model.getValueAt(i, 1) + "," + model.getValueAt(i, 2) + "," + "Solicitada");
+                bw.newLine();
+            }
+            bw.flush();
+            bw.close();
+            fw.close();
+        } catch (Exception e) {
+            Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    private String AsignarHora(String fecha, String hora, String minutos, String siglas, int selected) {
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        File file = new File("C:\\user\\AgendaAdmin.txt");
+        try (Scanner sc = new Scanner(file)) {
+            while (sc.hasNextLine()) {
+                String linea = sc.nextLine();
+                String datos[] = linea.split(",");
+                String date = datos[0];
+                String hour = datos[4];
+                if (date.equals(fecha)) {
+                    if (hour.equals(hora + ":" + minutos + " " + siglas)) {
+                        if (Integer.parseInt(hora) + 1 < 10) {
+                            hora = "0" + String.valueOf(Integer.parseInt(hora) + 1);
+                        } else {
+                            hora = String.valueOf(Integer.parseInt(hora) + 1);
+                        }
+                        if (Integer.parseInt(hora) >= 12) {
+                            siglas = "pm";
+                        }
+                        if (Integer.parseInt(hora) == 13) {
+                            hora = String.valueOf(Integer.parseInt(hora) + 1);
+                        }
+                        if (Integer.parseInt(hora) == 18) {
+                            return "";
+                        }
+                    }
+                }
+            }
+            sc.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (model.getValueAt(selected, 2).equals("Baño") || model.getValueAt(selected, 2).equals("Guarderia")) {
+            return null;
+        }
+        return hora + ":" + minutos + " " + siglas;
     }
 
 }

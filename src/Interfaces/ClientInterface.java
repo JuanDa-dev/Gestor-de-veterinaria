@@ -86,7 +86,7 @@ public class ClientInterface extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        SolicitudCita.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        SolicitudCita.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         SolicitudCita.setSize(new java.awt.Dimension(460, 312));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -164,7 +164,7 @@ public class ClientInterface extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        ModificarCita.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        ModificarCita.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         ModificarCita.setSize(new java.awt.Dimension(513, 312));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -417,8 +417,8 @@ public class ClientInterface extends javax.swing.JFrame {
                 BufferedWriter bw = new BufferedWriter(fw);//Creo el buffered
                 if (!CitaRepetida(cliente, ced, nombre)) {
                     bw.write(ced + "," + nombre + "," + razaPerro + "," + colorPerro + "," + date);
+                    bw.newLine();
                 }
-                bw.newLine();
                 bw.flush();
                 bw.close();
                 fw.close();
@@ -454,26 +454,26 @@ public class ClientInterface extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);//Borro los registros
         if (Esnumero(buscar.getText()) && !buscar.getText().isEmpty()) {//Reviso que ingrese un numero o que la cadena no este vacia
-            File archivo = new File("C:\\user\\AgendaAdmin.txt");
-            if (archivo.exists()) {
-                try (Scanner sc = new Scanner(archivo)) {//Abro el archivo
-                    while (sc.hasNextLine()) {//mientras halla una siguiente linea
-                        String linea = sc.nextLine();
-                        String data[] = linea.split(",");
-                        String date = data[0];
-                        String ced = data[1];
-                        String nombre = data[2];
-                        String servicio = data[3];
-                        String hora = data[4];
-                        String estado = data[5];
-                        if (ced.equals(buscar.getText())) {//si encuentro coincidencias, muestra los datos en la tabla
-                            model.addRow(new Object[]{date, ced, nombre, servicio, hora, estado});//Muestro los datos de esa cedula
-                        }
+            String ruta = "C:\\user";
+            String name = "AgendaAdmin.txt";
+            File archivo = new File(ruta, name);
+            try (Scanner sc = new Scanner(archivo)) {//Abro el archivo
+                while (sc.hasNextLine()) {//mientras halla una siguiente linea
+                    String linea = sc.nextLine();
+                    String data[] = linea.split(",");
+                    String date = data[0];
+                    String ced = data[1];
+                    String nombre = data[2];
+                    String servicio = data[3];
+                    String hora = data[4];
+                    String estado = data[5];
+                    if (ced.equals(buscar.getText())) {//si encuentro coincidencias, muestra los datos en la tabla
+                        model.addRow(new Object[]{date, ced, nombre, servicio, hora, estado});//Muestro los datos de esa cedula
                     }
-                    sc.close();
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                sc.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             model.setRowCount(0);//Borro otra vez los registros
@@ -520,8 +520,8 @@ public class ClientInterface extends javax.swing.JFrame {
                     BufferedWriter bw = new BufferedWriter(fw);
                     if (!CitaRepetida(cita, ced, nombre)) {
                         bw.write(ced + "," + nombre + "," + serv + "," + estado);
+                        bw.newLine();
                     }
-                    bw.newLine();
                     bw.flush();
                     bw.close();
                     fw.close();
@@ -707,11 +707,11 @@ public class ClientInterface extends javax.swing.JFrame {
                     }
                     if (!estado.equals("Solicitada")) {
                         bw.write(date + "," + ced + "," + nombre + "," + servicio + "," + hora + "," + estado);
+                        bw.newLine();
                     } else {//Cancelo la cita en la agenda que cambio el tipo de servicio, y le solicito otra
                         bw.write(date + "," + ced + "," + nombre + "," + servicio + "," + hora + "," + "Cancelada");
                         GuardarCita(ced, nombre, servicio, estado);
                     }
-                    bw.newLine();
                 }
                 bw.flush();
                 bw.close();

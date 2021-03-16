@@ -70,7 +70,7 @@ public class VetInterface extends javax.swing.JFrame {
         petTextField = new javax.swing.JTextField();
         imgBackground = new javax.swing.JLabel();
 
-        Agenda.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        Agenda.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         Agenda.setTitle("Agenda de Citas");
         Agenda.setLocation(new java.awt.Point(150, 100));
         Agenda.setSize(new java.awt.Dimension(722, 387));
@@ -247,17 +247,15 @@ public class VetInterface extends javax.swing.JFrame {
     private void consultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultButtonActionPerformed
         Agenda.setVisible(true);
         File file = new File("C:\\user\\AgendaAdmin.txt");
-        if (file.exists()) {
-            DefaultTableModel model = (DefaultTableModel) dataTable.getModel();
-            try (Scanner sc = new Scanner(file)) {
-                while (sc.hasNextLine()) {
-                    String linea = sc.nextLine();
-                    String data[] = linea.split(",");
-                    model.addRow(new Object[]{data[0], data[1], data[2], data[3], data[4]});
-                }
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(VetInterface.class.getName()).log(Level.SEVERE, null, ex);
+        DefaultTableModel model = (DefaultTableModel) dataTable.getModel();
+        try (Scanner sc = new Scanner(file)) {
+            while (sc.hasNextLine()) {
+                String linea = sc.nextLine();
+                String data[] = linea.split(",");
+                model.addRow(new Object[]{data[0], data[1], data[2], data[3], data[4]});
             }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(VetInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_consultButtonActionPerformed
 

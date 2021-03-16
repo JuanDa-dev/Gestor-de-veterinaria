@@ -4,7 +4,7 @@
   <NonVisualComponents>
     <Container class="javax.swing.JFrame" name="SolicitudCita">
       <Properties>
-        <Property name="defaultCloseOperation" type="int" value="3"/>
+        <Property name="defaultCloseOperation" type="int" value="2"/>
         <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[460, 312]"/>
         </Property>
@@ -113,7 +113,7 @@
     </Container>
     <Container class="javax.swing.JFrame" name="ModificarCita">
       <Properties>
-        <Property name="defaultCloseOperation" type="int" value="3"/>
+        <Property name="defaultCloseOperation" type="int" value="2"/>
         <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[513, 312]"/>
         </Property>
