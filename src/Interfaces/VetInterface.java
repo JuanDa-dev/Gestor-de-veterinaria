@@ -70,6 +70,7 @@ public class VetInterface extends javax.swing.JFrame {
         petTextField = new javax.swing.JTextField();
         imgBackground = new javax.swing.JLabel();
 
+        Agenda.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Agenda.setTitle("Agenda de Citas");
         Agenda.setLocation(new java.awt.Point(150, 100));
         Agenda.setSize(new java.awt.Dimension(722, 387));

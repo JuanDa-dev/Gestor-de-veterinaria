@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -404,15 +405,12 @@ public class ClientInterface extends javax.swing.JFrame {
 
             }
 
-            String dia = Integer.toString(fecha.getCalendar().get(Calendar.DATE));//Recupera el dia de la tabla
-            String mes = Integer.toString(fecha.getCalendar().get(Calendar.MONTH + 1));//Recupera el mes de la tabla
-            String año = Integer.toString(fecha.getCalendar().get(Calendar.YEAR));//Recupera el año de la tabla
             //SACAR LA INFORMACION DE TEXTFIELD
             String ced = cedula.getText();
             String nombre = nombrePerro.getText();
             String razaPerro = raza.getText();
             String colorPerro = color.getText();
-            String date = dia + "/" + mes + "/" + año;
+            String date = DateFormat.getDateInstance().format(fecha.getDate());
 
             //Escribo la informacion en el archivo
             try (FileWriter fw = new FileWriter(cliente.getAbsolutePath(), true)) {
