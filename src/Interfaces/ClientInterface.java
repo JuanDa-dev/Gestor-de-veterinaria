@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interfaces;
 
 import Login.Start;
@@ -22,10 +17,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author juanq
- */
 public class ClientInterface extends javax.swing.JFrame {
 
     File cliente;
@@ -414,23 +405,23 @@ public class ClientInterface extends javax.swing.JFrame {
 
                 if (!cliente.exists()) {//Reviso que el archivo no exista
                     try {
-                        //mira si el archivo existe o no
+                        //Verifica si el archivo existe o no
                         f.mkdir();
                         cliente.createNewFile();//Creo el archivo
                     } catch (IOException ex) {
-                        Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(content, "Error", "El archivo no se encontró", JOptionPane.ERROR_MESSAGE);
                     }
 
                 }
 
-                //SACAR LA INFORMACION DE TEXTFIELD
+                //Se saca la información de los TextFields
                 String ced = cedula.getText();
                 String nombre = nombrePerro.getText();
                 String razaPerro = raza.getText();
                 String colorPerro = color.getText();
                 String date = DateFormat.getDateInstance().format(fecha.getDate());
 
-                //Escribo la informacion en el archivo
+                //Se escribe la informacion en el archivo
                 try (FileWriter fw = new FileWriter(cliente.getAbsolutePath(), true)) {
                     BufferedWriter bw = new BufferedWriter(fw);//Creo el buffered
                     if (!CitaRepetida(cliente, ced, nombre)) {
@@ -441,13 +432,13 @@ public class ClientInterface extends javax.swing.JFrame {
                     bw.close();
                     fw.close();
                 } catch (Exception e) {
-                    Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, e);
+                    JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(null,"Es imposible que su mascota haya nacido despues del dia de hoy");
+                JOptionPane.showMessageDialog(content, "Error", "Error de fecha de nacimiento", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null,"Verifique si ingreso todos los datos o si los ingreso correctamente");
+            JOptionPane.showMessageDialog(content, "Error", "Datos incorrectos, vuelva a intentarlo", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_registryButtonActionPerformed
 
@@ -463,7 +454,7 @@ public class ClientInterface extends javax.swing.JFrame {
 
     private void guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCambiosActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        save(model);//Guardo la informacion en el archivo
+        save(model);//Se guarda la informacion en el archivo
     }//GEN-LAST:event_guardarCambiosActionPerformed
 
     private void cancelarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCitaActionPerformed
@@ -472,7 +463,7 @@ public class ClientInterface extends javax.swing.JFrame {
         if (selected > -1) {
             model.setValueAt("Cancelada", selected, 5);
         } else {
-            JOptionPane.showMessageDialog(null,"Debe seleccionar una cita");
+            JOptionPane.showMessageDialog(content, "Error", "Debe seleccionar una cita", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_cancelarCitaActionPerformed
 
@@ -498,11 +489,11 @@ public class ClientInterface extends javax.swing.JFrame {
                     }
                     sc.close();
                 } catch (FileNotFoundException ex) {
-                    Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(content, "Error", "Archivo no encontrado", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } else {
-            model.setRowCount(0);//Borro otra vez los registros
+            model.setRowCount(0);//Se borran otra vez los registros
         }
     }//GEN-LAST:event_buscarKeyReleased
 
@@ -512,7 +503,7 @@ public class ClientInterface extends javax.swing.JFrame {
             SolicitarCita.setVisible(false);
             SolicitudCita.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null,"Debe seleccionar una cita");
+            JOptionPane.showMessageDialog(content, "Error", "Debe seleccionar la cita", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -522,14 +513,14 @@ public class ClientInterface extends javax.swing.JFrame {
             String data[] = {nombrePerro.getText(), raza.getText(), color.getText(), String.valueOf(fecha.getCalendar().get(Calendar.DATE))};
             if (Esnumero(cedula.getText()) && NoVacia(data)) {
                 if (Integer.parseInt(DateFormat.getDateInstance().format(fecha.getDate())) <= LocalDate.now().getDayOfMonth()) {
-                    //Creo las variables para el archivo agenda
+                    //Se crean las variables para el archivo agenda
                     String direccion = "C:\\user";
                     File f = new File(direccion);
                     String dir = "C:\\user";
                     String nameFile = "Citas.txt";
                     cita = new File(dir, nameFile);
 
-                    //Reviso que no exista el archivo agenda
+                    //Se revisa que no exista el archivo agenda
                     if (!cita.exists()) {
                         try {
                             f.mkdir();
@@ -555,16 +546,16 @@ public class ClientInterface extends javax.swing.JFrame {
                         bw.close();
                         fw.close();
                     } catch (Exception e) {
-                        Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, e);
+                        JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null,"Es imposible que su mascota haya nacido despues del dia de hoy");
+                    JOptionPane.showMessageDialog(content, "Error", "Error de fecha de nacimiento", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(null,"Debe ingresar todos lo datos para solicitar una cita");
+                JOptionPane.showMessageDialog(content, "Error", "Por favor Ingrese todos los datos", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null,"Necesita seleccionar un servicio");
+            JOptionPane.showMessageDialog(content, "Error", "Debe seleccionar un servicio", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_SolicitarCitaActionPerformed
 
@@ -586,7 +577,7 @@ public class ClientInterface extends javax.swing.JFrame {
         new Start().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    //Valido que la cedula que ingresan sea numerico
+    //Se valida que la cedula que ingresan sea numerico
     private boolean Esnumero(String cadena) {
         try {
             Integer.parseInt(cadena);
@@ -596,7 +587,7 @@ public class ClientInterface extends javax.swing.JFrame {
         }
     }
 
-    //Valido que todos los datos hallan sido ingresados
+    //Se valida que todos los datos hallan sido ingresados
     private boolean NoVacia(String[] cadena) {
         for (String cad : cadena) {
             if (cad.isEmpty()) {
@@ -606,7 +597,7 @@ public class ClientInterface extends javax.swing.JFrame {
         return true;
     }
 
-    //Subrutina para colocar los datos en la tabla de solicitid de citas
+    //Función para colocar los datos en la tabla de solicitid de citas
     private void TablaSolicitud() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.addRow(new Object[]{"Consulta", 60000, "1 hora"});
@@ -722,7 +713,7 @@ public class ClientInterface extends javax.swing.JFrame {
             try {
                 archivo.createNewFile();
             } catch (IOException ex) {
-                Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -760,7 +751,7 @@ public class ClientInterface extends javax.swing.JFrame {
                 fw.close();
                 sc.close();
             } catch (IOException ex) {
-                Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
             }
 
             try (FileWriter fw = new FileWriter(agenda.getAbsoluteFile())) {
@@ -777,7 +768,7 @@ public class ClientInterface extends javax.swing.JFrame {
                 fw.close();
                 sc.close();
             } catch (IOException ex) {
-                Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
             }
         }
         archivo.delete();

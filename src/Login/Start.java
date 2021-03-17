@@ -3,6 +3,7 @@ package Login;
 import Interfaces.ClientInterface;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 public class Start extends javax.swing.JFrame {
 
@@ -10,6 +11,7 @@ public class Start extends javax.swing.JFrame {
         initComponents();
         centreWindow();
     }
+// Algoritmo para centrar la ventana 
 
     private void centreWindow() {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -27,7 +29,7 @@ public class Start extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cardCOntent = new javax.swing.JPanel();
+        cardContent = new javax.swing.JPanel();
         clientButton = new javax.swing.JButton();
         vetButton = new javax.swing.JButton();
         adminButton = new javax.swing.JButton();
@@ -38,7 +40,7 @@ public class Start extends javax.swing.JFrame {
         setTitle("Veterinaria PerrosPET");
         setResizable(false);
 
-        cardCOntent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        cardContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         clientButton.setBackground(new java.awt.Color(153, 255, 255));
         clientButton.setText("Cliente");
@@ -48,7 +50,7 @@ public class Start extends javax.swing.JFrame {
                 clientButtonActionPerformed(evt);
             }
         });
-        cardCOntent.add(clientButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 160, 50));
+        cardContent.add(clientButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 160, 50));
 
         vetButton.setBackground(new java.awt.Color(153, 255, 255));
         vetButton.setText("Veterinario");
@@ -58,7 +60,7 @@ public class Start extends javax.swing.JFrame {
                 vetButtonActionPerformed(evt);
             }
         });
-        cardCOntent.add(vetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 160, 50));
+        cardContent.add(vetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 160, 50));
 
         adminButton.setBackground(new java.awt.Color(153, 255, 255));
         adminButton.setText("Administrador");
@@ -68,25 +70,25 @@ public class Start extends javax.swing.JFrame {
                 adminButtonActionPerformed(evt);
             }
         });
-        cardCOntent.add(adminButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 160, 50));
+        cardContent.add(adminButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 160, 50));
 
         vetTitle.setFont(new java.awt.Font("Castellar", 1, 18)); // NOI18N
         vetTitle.setForeground(new java.awt.Color(255, 102, 51));
         vetTitle.setText("veterinaria Perros PET");
-        cardCOntent.add(vetTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
+        cardContent.add(vetTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
         imgBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/Imagenes/Clientes.jpg"))); // NOI18N
-        cardCOntent.add(imgBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 390));
+        cardContent.add(imgBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 390));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cardCOntent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(cardContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cardCOntent, javax.swing.GroupLayout.PREFERRED_SIZE, 389, Short.MAX_VALUE)
+            .addComponent(cardContent, javax.swing.GroupLayout.PREFERRED_SIZE, 389, Short.MAX_VALUE)
         );
 
         pack();
@@ -100,11 +102,13 @@ public class Start extends javax.swing.JFrame {
     private void vetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vetButtonActionPerformed
         new LoginInterface("Veterinario").setVisible(true);
         this.dispose();
+        JOptionPane.showMessageDialog(cardContent, "Information ", "Para poder acceder al módulo escriba Nombre:Edilberto Clave 1111", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_vetButtonActionPerformed
 
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
         new LoginInterface("Administrador").setVisible(true);
         this.dispose();
+        JOptionPane.showMessageDialog(cardContent, "Information ", "Para poder acceder al módulo escriba Nombre:Juan Clave 1234", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_adminButtonActionPerformed
 
     /**
@@ -147,7 +151,7 @@ public class Start extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adminButton;
-    private javax.swing.JPanel cardCOntent;
+    private javax.swing.JPanel cardContent;
     private javax.swing.JButton clientButton;
     private javax.swing.JLabel imgBackground;
     private javax.swing.JButton vetButton;

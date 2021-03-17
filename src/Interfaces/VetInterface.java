@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interfaces;
 
 import Login.Start;
@@ -274,7 +269,7 @@ public class VetInterface extends javax.swing.JFrame {
                     }
                 }
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(VetInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "error ", "Archivo no encontrado", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_consultButtonActionPerformed
@@ -305,11 +300,11 @@ public class VetInterface extends javax.swing.JFrame {
                 bw.close();
                 fw.close();
             } catch (IOException ex) {
-                Logger.getLogger(VetInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
             }
             CambiarEstadoCita();//al crear la historia clinica, la cita se daria por finalizada
         } else {
-            JOptionPane.showMessageDialog(null,"Ningun campo debe quedar vacio");
+            JOptionPane.showMessageDialog(content, "Error", "Ningun campo debe quedar vacio", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_createHButtonActionPerformed
 
@@ -322,7 +317,7 @@ public class VetInterface extends javax.swing.JFrame {
             petTextField.setText((String) model.getValueAt(selected, 2));
             Agenda.dispose();
         } else {
-            JOptionPane.showMessageDialog(null,"Debe seleccionar una cita");
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una cita");
         }
     }//GEN-LAST:event_selectButtonActionPerformed
 
@@ -406,11 +401,11 @@ public class VetInterface extends javax.swing.JFrame {
     }
 
     private void CambiarEstadoCita() {
-        String sDir = "C:\\user"; // direccion
-        File f = new File(sDir); // instancia de la carpeta
-        String ruta = "C:\\user"; // ruta para el archivo
-        String fileName = "Cambios.txt"; // nombre
-        File cambios = new File(ruta, fileName); // instancia el archivo
+        String sDir = "C:\\user"; // Dirección absoluta
+        File f = new File(sDir); // Instancia de la carpeta
+        String ruta = "C:\\user"; // Ruta relativa del archivo
+        String fileName = "Cambios.txt"; // Nombre
+        File cambios = new File(ruta, fileName); // Instancia el archivo
         agenda = new File("C:\\user\\AgendaAdmin.txt");
 
         if (!cambios.exists()) {
@@ -418,7 +413,7 @@ public class VetInterface extends javax.swing.JFrame {
             try {
                 cambios.createNewFile();
             } catch (IOException ex) {
-                Logger.getLogger(VetInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "No se pudo crear el archivo", JOptionPane.ERROR_MESSAGE);
             }
         }
         if (agenda.exists()) {
@@ -445,10 +440,10 @@ public class VetInterface extends javax.swing.JFrame {
                 fw.close();
                 sc.close();
             } catch (IOException ex) {
-                Logger.getLogger(VetInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
             }
 
-            //Actualizo la informacion en el archivo de la agenda
+            //Actualiza la informacion en el archivo de la agenda
             try (FileWriter fw = new FileWriter(agenda.getAbsoluteFile())) {
                 BufferedWriter bw = new BufferedWriter(fw);
                 Scanner sc = new Scanner(cambios);
@@ -463,7 +458,7 @@ public class VetInterface extends javax.swing.JFrame {
                 fw.close();
                 sc.close();
             } catch (IOException ex) {
-                Logger.getLogger(VetInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
             }
         }
         cambios.delete();

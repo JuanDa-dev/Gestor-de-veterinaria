@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interfaces;
 
 import Login.Start;
@@ -172,7 +167,7 @@ public class AdminInterface extends javax.swing.JFrame {
                 .addComponent(showDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(cardcontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cancelQuoteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cancelQuoteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
         );
@@ -257,7 +252,7 @@ public class AdminInterface extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("El veterinario atiende los sabados y domingos de 08:00 am - 01:00 pm y");
+        jLabel6.setText("El veterinario atiende de lunes a viernes de 08:00 am - 01:00 pm y");
 
         jLabel7.setText("de 02:00 pm - 06:00 pm");
 
@@ -455,7 +450,7 @@ public class AdminInterface extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jButton3))
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(cardContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -507,7 +502,7 @@ public class AdminInterface extends javax.swing.JFrame {
                 }
                 sc.close();
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(VetInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Archivo no encontrado", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_consultQuoteButtonActionPerformed
@@ -518,7 +513,7 @@ public class AdminInterface extends javax.swing.JFrame {
         if (selecteRow != -1) {
             model.removeRow(selecteRow);
         } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una cita");
+            JOptionPane.showMessageDialog(content, "Error", "Debe seleccionar una cita", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_cancelQuoteButtonActionPerformed
 
@@ -530,8 +525,8 @@ public class AdminInterface extends javax.swing.JFrame {
         if (Esnumero(buscar.getText()) && !buscar.getText().isEmpty()) {//Reviso que ingrese un numero o que la cadena no este vacia
             File archivo = new File("C:\\user\\AgendaAdmin.txt");
             if (archivo.exists()) {
-                try (Scanner sc = new Scanner(archivo)) {//Abro el archivo
-                    while (sc.hasNextLine()) {//mientras halla una siguiente linea
+                try (Scanner sc = new Scanner(archivo)) {//Se abre el archivo
+                    while (sc.hasNextLine()) {//Mientras halla una siguiente linea
                         String linea = sc.nextLine();
                         String data[] = linea.split(",");
                         String fecha = data[0];
@@ -562,22 +557,22 @@ public class AdminInterface extends javax.swing.JFrame {
                                 break;
                         }
                         String estado = data[5];
-                        if (cedula.equals(buscar.getText()) && estado.equals("Finalizada")) {//si encuentro coincidencias, muestra los datos en la tabla
-                            model.addRow(new Object[]{fecha, cedula, nombrePerro, servicio, costo});//Muestro los datos de esa cedula
+                        if (cedula.equals(buscar.getText()) && estado.equals("Finalizada")) {//Si encuentra coincidencias, muestra los datos en la tabla
+                            model.addRow(new Object[]{fecha, cedula, nombrePerro, servicio, costo});//Se muestran los datos de esa cedula
                             total += costo;
                         }
                     }
                     sc.close();
                 } catch (FileNotFoundException ex) {
-                    Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(content, "Error", "Archivo no encontrado", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } else {
-            model.setRowCount(0);//Borro otra vez los registros
+            model.setRowCount(0);//Se borran otra vez los registros
         }
         jTextField2.setText(String.valueOf(total));
     }//GEN-LAST:event_buscarKeyReleased
-    //Valido que la cedula que ingresan sea numerico
+    //Se valida que la cedula que ingresan sea numerico
     private boolean Esnumero(String cadena) {
         try {
             Integer.parseInt(cadena);
@@ -591,25 +586,25 @@ public class AdminInterface extends javax.swing.JFrame {
         int selected = jTable2.getSelectedRow();
         if (selected > -1 && !jTextField1.getText().equals("")) {
             //Datos para crear el archivo de Clientes
-            String sDir = "C:\\user"; // direccion
-            File f = new File(sDir); // instancia de la carpeta
-            String ruta = "C:\\user"; // ruta para el archivo
-            String fileName = "AgendaAdmin.txt"; // nombre
-            File agenda = new File(ruta, fileName); // instancia el archivo
+            String sDir = "C:\\user"; // Ruta absoulta
+            File f = new File(sDir); // Instancia de la carpeta
+            String ruta = "C:\\user"; // Ruta relatova del archivo
+            String fileName = "AgendaAdmin.txt"; // Nombre
+            File agenda = new File(ruta, fileName); // Instancia el archivo
 
-            if (!agenda.exists()) {//Reviso que el archivo no exista
+            if (!agenda.exists()) {//Se revisa que el archivo no exista
                 try {
-                    //mira si el archivo existe o no
+                    //Verifica si el archivo existe o no
                     f.mkdir();
-                    agenda.createNewFile();//Creo el archivo
+                    agenda.createNewFile();//Se crea el archivo
                 } catch (IOException ex) {
-                    Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
                 }
 
             }
 
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-            //SACAR LA INFORMACION DE TEXTFIELD
+            //Toma la información de los TextFields
             String ced = (String) model.getValueAt(0, 0);
             String nombre = (String) model.getValueAt(0, 1);
             String servicio = (String) model.getValueAt(0, 2);
@@ -618,9 +613,9 @@ public class AdminInterface extends javax.swing.JFrame {
             String hora = jTextField1.getText();
             Guardar();
 
-            //Escribo la informacion en el archivo
+            //Se escribe la informacion en el archivo
             try (FileWriter fw = new FileWriter(agenda.getAbsolutePath(), true)) {
-                BufferedWriter bw = new BufferedWriter(fw);//Creo el buffered
+                BufferedWriter bw = new BufferedWriter(fw);//Se crea el buffered
                 if (!CitaRepetida(agenda, ced, nombre)) {
                     bw.write(date + "," + ced + "," + nombre + "," + servicio + "," + hora + "," + estado);
                     bw.newLine();
@@ -629,7 +624,7 @@ public class AdminInterface extends javax.swing.JFrame {
                 bw.close();
                 fw.close();
             } catch (Exception e) {
-                Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
             }
         }
         jTextField1.setText("");
@@ -637,17 +632,17 @@ public class AdminInterface extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         DefaultTableModel model = (DefaultTableModel) dataTable.getModel();
-        String sDir = "C:\\user"; // direccion
-        File f = new File(sDir); // instancia de la carpeta
-        String ruta = "C:\\user"; // ruta para el archivo
-        String fileName = "AgendaAdmin.txt"; // nombre
+        String sDir = "C:\\user"; // Ruta absoulta
+        File f = new File(sDir); // Instancia de la carpeta
+        String ruta = "C:\\user"; // Ruta relativa del archivo
+        String fileName = "AgendaAdmin.txt"; // Nombre
         File Adminfile = new File(ruta, fileName);
         if (!Adminfile.exists()) {
             f.mkdir();
             try {
                 Adminfile.createNewFile();
             } catch (IOException ex) {
-                Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
             }
         }
         try (FileWriter fw = new FileWriter(Adminfile.getAbsoluteFile())) {
@@ -660,7 +655,7 @@ public class AdminInterface extends javax.swing.JFrame {
             bw.close();
             fw.close();
         } catch (IOException ex) {
-            Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -676,32 +671,32 @@ public class AdminInterface extends javax.swing.JFrame {
                 DiaActual = LocalDate.now().getDayOfMonth();
                 pass = true;
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Verifique si coloco una fecha");
+                JOptionPane.showMessageDialog(content, "Error", "Por favor coloque una fecha", JOptionPane.ERROR_MESSAGE);
                 pass = false;
             }
             if (pass) {
                 if (Dia > DiaActual) {
                     nombreDia = String.valueOf(bornDateCollecter.getDate()).substring(0, 3);
                     if (nombreDia.equals("Sat") || nombreDia.equals("Sun")) {//Si el dia es sabado o domingo el veterinario no atiende esos 2 dias
-                        JOptionPane.showMessageDialog(null, "El Veterinario no atiende los dias sabados ni domingos");
+                        JOptionPane.showMessageDialog(content, "Error", "El veterinario no atiende fines de semana", JOptionPane.ERROR_MESSAGE);
                     } else {
                         String h = AsignarHora(date, "08", "00", "am", selected);
                         if (!h.equals("") && !h.equals(null)) {
                             jTextField1.setText(h);
                             reAsignButton.setEnabled(true);
                         } else if (h.equals("")) {
-                            JOptionPane.showMessageDialog(null, "No hay horario disponible para ese dia, ingrese otro dia");
+                            JOptionPane.showMessageDialog(content, "Error", "No hay horas disponible, ingrese otra fecha", JOptionPane.ERROR_MESSAGE);
                             reAsignButton.setEnabled(false);
                         } else {
                             jTextField1.setText("No necesita");
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Tiene que ingresar un dia mayor al actual");
+                    JOptionPane.showMessageDialog(content, "Error", "Ingrese un día después de hoy", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Tiene que seleccionar una cita");
+            JOptionPane.showMessageDialog(content, "Error", "Debe seleccionar una cita", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -724,7 +719,7 @@ public class AdminInterface extends javax.swing.JFrame {
                 }
                 sc.close();
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Archivo no encontrado", JOptionPane.ERROR_MESSAGE);;
             }
         }
     }//GEN-LAST:event_asignQuoteButtonActionPerformed
@@ -736,36 +731,36 @@ public class AdminInterface extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if (!jTextField2.getText().equals("") && !jTextField2.getText().equals("0")) {
-            String sDir = "C:\\user"; // direccion
-            File f = new File(sDir); // instancia de la carpeta
-            String ruta = "C:\\user"; // ruta para el archivo
-            String fileName = "Facturación.txt"; // nombre
+            String sDir = "C:\\user"; // Ruta absoulta
+            File f = new File(sDir); // Instancia de la carpeta
+            String ruta = "C:\\user"; // Ruta relativa del archivo
+            String fileName = "Facturación.txt"; // Nombre
             File factura = new File(ruta, fileName);
             if (!factura.exists()) {
                 f.mkdir();
                 try {
                     factura.createNewFile();
                 } catch (IOException ex) {
-                    Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
                 }
             }
             try (FileWriter fw = new FileWriter(factura.getAbsoluteFile())) {
                 BufferedWriter bw = new BufferedWriter(fw);
-                bw.write(buscar.getText() + "," + jTextField2.getText());
+                bw.write(DateFormat.getDateInstance().format(bornDateCollecter.getDate()) + "," + buscar.getText() + "," + jTextField2.getText());
                 bw.newLine();
                 bw.flush();
                 bw.close();
                 fw.close();
             } catch (IOException ex) {
-                Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
             }
-            refrescarAgenda(buscar.getText());//Todas la citas facturadas seran eliminadas de la agenda del veterinario
+            refrescarAgenda(buscar.getText());//Se eliminan todas las citas facturadas de la agenda del veterinario
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             for (int i = 0; i < model.getRowCount(); i++) {
                 model.removeRow(i);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "No hay facturación");
+            JOptionPane.showMessageDialog(content, "Error", "No hay facturación", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
     private boolean CitaRepetida(File archivo, String cedula, String nombre) {
@@ -781,7 +776,7 @@ public class AdminInterface extends javax.swing.JFrame {
                 sc.close();
                 return false;
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Archivo no encontrado", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         }
@@ -862,25 +857,25 @@ public class AdminInterface extends javax.swing.JFrame {
     private javax.swing.JPanel title;
     // End of variables declaration//GEN-END:variables
 
-    //Guardo en el archivo citas
+    //Se guarda en el archivo citas
     private void Guardar() {
         int selected = jTable2.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.removeRow(selected);
-        //Creo las variables para el archivo agenda
+        //Se crean las variables para el archivo agenda
         String direccion = "C:\\user";
         File f = new File(direccion);
         String dir = "C:\\user";
         String nameFile = "Citas.txt";
         File cita = new File(dir, nameFile);
 
-        //Reviso que no exista el archivo cita para crearlo
+        //Se revisa que no exista el archivo cita para crearlo
         if (!cita.exists()) {
             try {
                 f.mkdir();
                 cita.createNewFile();
             } catch (IOException ex) {
-                Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -894,7 +889,7 @@ public class AdminInterface extends javax.swing.JFrame {
             bw.close();
             fw.close();
         } catch (Exception e) {
-            Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -929,7 +924,7 @@ public class AdminInterface extends javax.swing.JFrame {
                 }
                 sc.close();
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Archivo no encontrado", JOptionPane.ERROR_MESSAGE);
             }
             if (model.getValueAt(selected, 2).equals("Baño") || model.getValueAt(selected, 2).equals("Guarderia")) {
                 return null;
@@ -939,11 +934,11 @@ public class AdminInterface extends javax.swing.JFrame {
     }
 
     private void refrescarAgenda(String cedula) {
-        String sDir = "C:\\user"; // direccion
-        File f = new File(sDir); // instancia de la carpeta
-        String ruta = "C:\\user"; // ruta para el archivo
-        String fileName = "Cambios.txt"; // nombre
-        File cambios = new File(ruta, fileName); // instancia el archivo
+        String sDir = "C:\\user"; // Ruta absoluta
+        File f = new File(sDir); // Instancia de la carpeta
+        String ruta = "C:\\user"; // Ruta relativa del archivo
+        String fileName = "Cambios.txt"; // Nombre
+        File cambios = new File(ruta, fileName); // Instancia el archivo
         File agenda = new File("C:\\user\\AgendaAdmin.txt");
 
         if (!cambios.exists()) {
@@ -951,7 +946,7 @@ public class AdminInterface extends javax.swing.JFrame {
             try {
                 cambios.createNewFile();
             } catch (IOException ex) {
-                Logger.getLogger(VetInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
             }
         }
         if (agenda.exists()) {
@@ -982,10 +977,10 @@ public class AdminInterface extends javax.swing.JFrame {
                 fw.close();
                 sc.close();
             } catch (IOException ex) {
-                Logger.getLogger(VetInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
             }
 
-            //Actualizo la informacion en el archivo de la agenda
+            //Se actualiza la informacion en el archivo de la agenda
             try (FileWriter fw = new FileWriter(agenda.getAbsoluteFile())) {
                 BufferedWriter bw = new BufferedWriter(fw);
                 Scanner sc = new Scanner(cambios);
@@ -1000,7 +995,7 @@ public class AdminInterface extends javax.swing.JFrame {
                 fw.close();
                 sc.close();
             } catch (IOException ex) {
-                Logger.getLogger(VetInterface.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(content, "Error", "Error inesperado", JOptionPane.ERROR_MESSAGE);
             }
         }
         cambios.delete();

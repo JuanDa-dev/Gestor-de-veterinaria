@@ -134,14 +134,14 @@ public class LoginInterface extends javax.swing.JFrame {
         if (user.equals("Cliente")) {//Usuario y clave para el modulo cliente
             new ClientInterface().setVisible(true);
             this.dispose();
-        } else if (user.equals("Veterinario") && nombre.equals("David") && key == 1110) {//Usuario y clave para el modulo veterinario
+        } else if (user.equals("Veterinario") && nombre.equals("Edilberto") && key == 1111) {//Usuario y clave para el modulo veterinario
             new VetInterface().setVisible(true);
             this.dispose();
-        } else if (user.equals("Administrador") && nombre.equals("Juan") && key == 1415) {//Ususario y clave para el modulo administrador
+        } else if (user.equals("Administrador") && nombre.equals("Juan") && key == 1234) {//Ususario y clave para el modulo administrador
             new AdminInterface().setVisible(true);
             this.dispose();
-        }else{
-            JOptionPane.showMessageDialog(null,"Error, Usuario o contraseña incorrectos, digite nuevamente");
+        } else {
+            JOptionPane.showMessageDialog(cardContent,"Error","Usuario o contraseña incorrectos, digite nuevamente",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_singInbuttonMouseClicked
 
