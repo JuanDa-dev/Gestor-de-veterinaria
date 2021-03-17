@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import Login.Start;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.BufferedWriter;
@@ -35,10 +36,6 @@ public class AdminInterface extends javax.swing.JFrame {
         this.setLocation(x, y - 25);
     }
 
-    public void save(DefaultTableModel model) {
-
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,10 +50,8 @@ public class AdminInterface extends javax.swing.JFrame {
         showDataPanel = new javax.swing.JScrollPane();
         dataTable = new javax.swing.JTable();
         title = new javax.swing.JPanel();
-        saveButton = new javax.swing.JButton();
         agendTItle = new javax.swing.JLabel();
         cancelQuoteButton = new javax.swing.JButton();
-        asignQuoteButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         AsignQuotes = new javax.swing.JFrame();
         content = new javax.swing.JPanel();
@@ -70,6 +65,8 @@ public class AdminInterface extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         cardContent = new javax.swing.JPanel();
         adminCardTitle = new javax.swing.JPanel();
         adminTitle = new javax.swing.JLabel();
@@ -81,10 +78,13 @@ public class AdminInterface extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         buscar = new javax.swing.JTextField();
+        asignQuoteButton = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         AgendaAdmin.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         AgendaAdmin.setTitle("Agenda de Citas");
         AgendaAdmin.setLocation(new java.awt.Point(150, 100));
+        AgendaAdmin.setResizable(false);
         AgendaAdmin.setSize(new java.awt.Dimension(735, 430));
 
         cardcontent.setPreferredSize(new java.awt.Dimension(723, 382));
@@ -124,15 +124,6 @@ public class AdminInterface extends javax.swing.JFrame {
 
         title.setBackground(new java.awt.Color(8, 156, 255));
 
-        saveButton.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        saveButton.setText("Guardar ");
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
-            }
-        });
-        title.add(saveButton);
-
         agendTItle.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
         agendTItle.setText("Agenda");
         title.add(agendTItle);
@@ -143,15 +134,6 @@ public class AdminInterface extends javax.swing.JFrame {
         cancelQuoteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelQuoteButtonActionPerformed(evt);
-            }
-        });
-
-        asignQuoteButton.setBackground(new java.awt.Color(8, 156, 255));
-        asignQuoteButton.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        asignQuoteButton.setText("Asignar Cita");
-        asignQuoteButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                asignQuoteButtonActionPerformed(evt);
             }
         });
 
@@ -170,17 +152,16 @@ public class AdminInterface extends javax.swing.JFrame {
             cardcontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(cardcontentLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(showDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(cardcontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cardcontentLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(showDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(cardcontentLayout.createSequentialGroup()
+                        .addGap(229, 229, 229)
+                        .addComponent(cancelQuoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(31, Short.MAX_VALUE))
-            .addGroup(cardcontentLayout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(cancelQuoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(asignQuoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(152, 152, 152))
         );
         cardcontentLayout.setVerticalGroup(
             cardcontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,13 +171,9 @@ public class AdminInterface extends javax.swing.JFrame {
                 .addComponent(showDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(cardcontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(cardcontentLayout.createSequentialGroup()
-                        .addGap(0, 1, Short.MAX_VALUE)
-                        .addGroup(cardcontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cancelQuoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(asignQuoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cancelQuoteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout AgendaAdminLayout = new javax.swing.GroupLayout(AgendaAdmin.getContentPane());
@@ -211,8 +188,11 @@ public class AdminInterface extends javax.swing.JFrame {
         );
 
         AsignQuotes.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        AsignQuotes.setTitle("Re Asignar Cita");
+        AsignQuotes.setTitle("Asignación de Citas");
         AsignQuotes.setMinimumSize(new java.awt.Dimension(360, 400));
+        AsignQuotes.setPreferredSize(new java.awt.Dimension(517, 430));
+        AsignQuotes.setResizable(false);
+        AsignQuotes.setSize(new java.awt.Dimension(530, 455));
 
         content.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -277,6 +257,10 @@ public class AdminInterface extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("El veterinario atiende los sabados y domingos de 08:00 am - 01:00 pm y");
+
+        jLabel7.setText("de 02:00 pm - 06:00 pm");
+
         javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
         content.setLayout(contentLayout);
         contentLayout.setHorizontalGroup(
@@ -286,22 +270,27 @@ public class AdminInterface extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(contentLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(23, Short.MAX_VALUE))
+                        .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(contentLayout.createSequentialGroup()
+                                .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(contentLayout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(bornDateTitle))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton2)
+                                    .addComponent(bornDateCollecter, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(31, 31, 31)
+                                .addComponent(reAsignButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(32, Short.MAX_VALUE))
                     .addGroup(contentLayout.createSequentialGroup()
                         .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(contentLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(bornDateTitle))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(bornDateCollecter, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(reAsignButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43))))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         contentLayout.setVerticalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,11 +309,15 @@ public class AdminInterface extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2))
-                        .addContainerGap(27, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(reAsignButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))))
+                        .addGap(25, 25, 25)))
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout AsignQuotesLayout = new javax.swing.GroupLayout(AsignQuotes.getContentPane());
@@ -339,6 +332,8 @@ public class AdminInterface extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Administrador");
+        setResizable(false);
 
         cardContent.setBackground(new java.awt.Color(255, 255, 255));
         cardContent.setPreferredSize(new java.awt.Dimension(650, 440));
@@ -393,31 +388,52 @@ public class AdminInterface extends javax.swing.JFrame {
             }
         });
 
+        asignQuoteButton.setBackground(new java.awt.Color(8, 156, 255));
+        asignQuoteButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        asignQuoteButton.setText("Asignar Cita");
+        asignQuoteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asignQuoteButtonActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(8, 156, 255));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton3.setText("Volver");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout cardContentLayout = new javax.swing.GroupLayout(cardContent);
         cardContent.setLayout(cardContentLayout);
         cardContentLayout.setHorizontalGroup(
             cardContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(adminCardTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(cardContentLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(cardContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cardContentLayout.createSequentialGroup()
-                        .addGap(217, 217, 217)
+                        .addComponent(jButton3)
+                        .addGap(119, 119, 119)
                         .addComponent(jLabel1))
                     .addGroup(cardContentLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(cardContentLayout.createSequentialGroup()
-                        .addGap(103, 103, 103)
+                        .addGap(76, 76, 76)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
                         .addGroup(cardContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(consultQuoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(cardContentLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
                                 .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel3)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, cardContentLayout.createSequentialGroup()
+                                .addComponent(consultQuoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(asignQuoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         cardContentLayout.setVerticalGroup(
@@ -425,8 +441,10 @@ public class AdminInterface extends javax.swing.JFrame {
             .addGroup(cardContentLayout.createSequentialGroup()
                 .addComponent(adminCardTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(27, 27, 27)
+                .addGroup(cardContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton3))
+                .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(cardContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -435,7 +453,9 @@ public class AdminInterface extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
-                .addComponent(consultQuoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(cardContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(consultQuoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(asignQuoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35))
         );
 
@@ -486,13 +506,10 @@ public class AdminInterface extends javax.swing.JFrame {
         int selecteRow = dataTable.getSelectedRow();
         if (selecteRow != -1) {
             model.removeRow(selecteRow);
+        } else {
+            mensaje("Debe seleccionar una cita");
         }
     }//GEN-LAST:event_cancelQuoteButtonActionPerformed
-
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        DefaultTableModel model = (DefaultTableModel) dataTable.getModel();
-        save(model);
-    }//GEN-LAST:event_saveButtonActionPerformed
 
     private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -501,46 +518,48 @@ public class AdminInterface extends javax.swing.JFrame {
         int costo = 0;
         if (Esnumero(buscar.getText()) && !buscar.getText().isEmpty()) {//Reviso que ingrese un numero o que la cadena no este vacia
             File archivo = new File("C:\\user\\AgendaAdmin.txt");
-            try (Scanner sc = new Scanner(archivo)) {//Abro el archivo
-                while (sc.hasNextLine()) {//mientras halla una siguiente linea
-                    String linea = sc.nextLine();
-                    String data[] = linea.split(",");
-                    String fecha = data[0];
-                    String cedula = data[1];
-                    String nombrePerro = data[2];
-                    String servicio = data[3];
-                    switch (servicio) {
-                        case "Consulta":
-                            costo = 60000;
-                            break;
-                        case "Control":
-                            costo = 10000;
-                            break;
-                        case "Desparasitación":
-                            costo = 40000;
-                            break;
-                        case "Vacunación":
-                            costo = 35000;
-                            break;
-                        case "Guarderia":
-                            costo = 35000;
-                            break;
-                        case "Radiologia":
-                            costo = 100000;
-                            break;
-                        case "Baño":
-                            costo = 25000;
-                            break;
+            if (archivo.exists()) {
+                try (Scanner sc = new Scanner(archivo)) {//Abro el archivo
+                    while (sc.hasNextLine()) {//mientras halla una siguiente linea
+                        String linea = sc.nextLine();
+                        String data[] = linea.split(",");
+                        String fecha = data[0];
+                        String cedula = data[1];
+                        String nombrePerro = data[2];
+                        String servicio = data[3];
+                        switch (servicio) {
+                            case "Consulta":
+                                costo = 60000;
+                                break;
+                            case "Control":
+                                costo = 10000;
+                                break;
+                            case "Desparasitación":
+                                costo = 40000;
+                                break;
+                            case "Vacunación":
+                                costo = 35000;
+                                break;
+                            case "Guarderia":
+                                costo = 35000;
+                                break;
+                            case "Radiologia":
+                                costo = 100000;
+                                break;
+                            case "Baño":
+                                costo = 25000;
+                                break;
+                        }
+                        String estado = data[5];
+                        if (cedula.equals(buscar.getText()) && estado.equals("Finalizada")) {//si encuentro coincidencias, muestra los datos en la tabla
+                            model.addRow(new Object[]{fecha, cedula, nombrePerro, servicio, costo});//Muestro los datos de esa cedula
+                            total += costo;
+                        }
                     }
-                    String estado = data[5];
-                    if (cedula.contains(buscar.getText()) && estado.equals("Finalizada")) {//si encuentro coincidencias, muestra los datos en la tabla
-                        model.addRow(new Object[]{fecha, cedula, nombrePerro, servicio, costo});//Muestro los datos de esa cedula
-                        total += costo;
-                    }
+                    sc.close();
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                sc.close();
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             model.setRowCount(0);//Borro otra vez los registros
@@ -602,32 +621,8 @@ public class AdminInterface extends javax.swing.JFrame {
                 Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, e);
             }
         }
-        this.dispose();
         jTextField1.setText("");
     }//GEN-LAST:event_reAsignButtonActionPerformed
-
-    private void asignQuoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignQuoteButtonActionPerformed
-        this.dispose();
-        AsignQuotes.setVisible(true);
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        File cita = new File("C:\\user\\Citas.txt");
-        try (Scanner sc = new Scanner(cita)) {
-            while (sc.hasNextLine()) {
-                String linea = sc.nextLine();
-                String datos[] = linea.split(",");
-                String cedula = datos[0];
-                String nombre = datos[1];
-                String servicio = datos[2];
-                String estado = datos[3];
-                if (!estado.equals("Cancelada")) {
-                    model.addRow(new Object[]{cedula, nombre, servicio, estado});
-                }
-            }
-            sc.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_asignQuoteButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         DefaultTableModel model = (DefaultTableModel) dataTable.getModel();
@@ -670,49 +665,81 @@ public class AdminInterface extends javax.swing.JFrame {
                 DiaActual = LocalDate.now().getDayOfMonth();
                 pass = true;
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Verifique si coloco una fecha");
+                mensaje("Verifique si coloco una fecha");
                 pass = false;
             }
             if (pass) {
                 if (Dia > DiaActual) {
                     nombreDia = String.valueOf(bornDateCollecter.getDate()).substring(0, 3);
                     if (nombreDia.equals("Sat") || nombreDia.equals("Sun")) {//Si el dia es sabado o domingo el veterinario no atiende esos 2 dias
-                        JOptionPane.showMessageDialog(null, "El Veterinario no atiende los dias sabados ni domingos");
+                        mensaje("El Veterinario no atiende los dias sabados ni domingos");
                     } else {
                         String h = AsignarHora(date, "08", "00", "am", selected);
                         if (!h.equals("") && !h.equals(null)) {
                             jTextField1.setText(h);
                             reAsignButton.setEnabled(true);
                         } else if (h.equals("")) {
-                            JOptionPane.showMessageDialog(null, "No hay horario disponible para ese dia, ingrese otro dia");
+                            mensaje("No hay horario disponible para ese dia, ingrese otro dia");
                             reAsignButton.setEnabled(false);
                         } else {
                             jTextField1.setText("No necesita");
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Tiene que ingresar un dia mayor al actual");
+                    mensaje("Tiene que ingresar un dia mayor al actual");
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Tiene que seleccionar una cita");
+            mensaje("Tiene que seleccionar una cita");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-    private boolean CitaRepetida(File archivo, String cedula, String nombre) {
-        try (Scanner sc = new Scanner(archivo)) {
-            while (sc.hasNextLine()) {
-                String linea = sc.nextLine();
-                String data[] = linea.split(",");
-                if (data[1].equals(cedula) && data[2].equals(nombre)) {
-                    return true;
+
+    private void asignQuoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignQuoteButtonActionPerformed
+        AsignQuotes.setVisible(true);
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        File cita = new File("C:\\user\\Citas.txt");
+        if (cita.exists()) {
+            try (Scanner sc = new Scanner(cita)) {
+                while (sc.hasNextLine()) {
+                    String linea = sc.nextLine();
+                    String datos[] = linea.split(",");
+                    String cedula = datos[0];
+                    String nombre = datos[1];
+                    String servicio = datos[2];
+                    String estado = datos[3];
+                    if (!estado.equals("Cancelada")) {
+                        model.addRow(new Object[]{cedula, nombre, servicio, estado});
+                    }
                 }
+                sc.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sc.close();
-            return false;
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
         }
+    }//GEN-LAST:event_asignQuoteButtonActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.dispose();
+        new Start().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+    private boolean CitaRepetida(File archivo, String cedula, String nombre) {
+        if (archivo.exists()) {
+            try (Scanner sc = new Scanner(archivo)) {
+                while (sc.hasNextLine()) {
+                    String linea = sc.nextLine();
+                    String data[] = linea.split(",");
+                    if (data[1].equals(cedula) && data[2].equals(nombre)) {
+                        return true;
+                    }
+                }
+                sc.close();
+                return false;
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(ClientInterface.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+        }
+        return false;
     }
 
     public static void main(String args[]) {
@@ -769,11 +796,14 @@ public class AdminInterface extends javax.swing.JFrame {
     private javax.swing.JTable dataTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
@@ -781,7 +811,6 @@ public class AdminInterface extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JButton reAsignButton;
-    private javax.swing.JButton saveButton;
     private javax.swing.JScrollPane showDataPanel;
     private javax.swing.JPanel title;
     // End of variables declaration//GEN-END:variables
@@ -825,39 +854,48 @@ public class AdminInterface extends javax.swing.JFrame {
     private String AsignarHora(String fecha, String hora, String minutos, String siglas, int selected) {
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         File file = new File("C:\\user\\AgendaAdmin.txt");
-        try (Scanner sc = new Scanner(file)) {
-            while (sc.hasNextLine()) {
-                String linea = sc.nextLine();
-                String datos[] = linea.split(",");
-                String date = datos[0];
-                String hour = datos[4];
-                if (date.equals(fecha)) {
-                    if (hour.equals(hora + ":" + minutos + " " + siglas)) {
-                        if (Integer.parseInt(hora) + 1 < 10) {
-                            hora = "0" + String.valueOf(Integer.parseInt(hora) + 1);
-                        } else {
-                            hora = String.valueOf(Integer.parseInt(hora) + 1);
-                        }
-                        if (Integer.parseInt(hora) >= 12) {
-                            siglas = "pm";
-                        }
-                        if (Integer.parseInt(hora) == 13) {
-                            hora = String.valueOf(Integer.parseInt(hora) + 1);
-                        }
-                        if (Integer.parseInt(hora) == 18) {
-                            return "";
+        if (file.exists()) {
+            try (Scanner sc = new Scanner(file)) {
+                while (sc.hasNextLine()) {
+                    String linea = sc.nextLine();
+                    String datos[] = linea.split(",");
+                    String date = datos[0];
+                    String hour = datos[4];
+                    if (date.equals(fecha)) {
+                        if (hour.equals(hora + ":" + minutos + " " + siglas)) {
+                            if (Integer.parseInt(hora) + 1 < 10) {
+                                hora = "0" + String.valueOf(Integer.parseInt(hora) + 1);
+                            } else {
+                                hora = String.valueOf(Integer.parseInt(hora) + 1);
+                            }
+                            if (Integer.parseInt(hora) >= 12) {
+                                siglas = "pm";
+                            }
+                            if (Integer.parseInt(hora) == 13) {
+                                hora = String.valueOf(Integer.parseInt(hora) + 1);
+                            }
+                            if (Integer.parseInt(hora) == 18) {
+                                return "";
+                            }
                         }
                     }
                 }
+                sc.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sc.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(AdminInterface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (model.getValueAt(selected, 2).equals("Baño") || model.getValueAt(selected, 2).equals("Guarderia")) {
-            return null;
+            if (model.getValueAt(selected, 2).equals("Baño") || model.getValueAt(selected, 2).equals("Guarderia")) {
+                return null;
+            }
         }
         return hora + ":" + minutos + " " + siglas;
+    }
+
+    private void mensaje(String cadena) {
+        try {
+            JOptionPane.showMessageDialog(null, cadena);
+        } catch (Exception e) {
+        }
     }
 
 }
