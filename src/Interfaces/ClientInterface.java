@@ -400,7 +400,15 @@ public class ClientInterface extends javax.swing.JFrame {
     private void registryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registryButtonActionPerformed
         String data[] = {nombrePerro.getText(), raza.getText(), color.getText(), String.valueOf(fecha.getCalendar().get(Calendar.DATE))};
         if (Esnumero(cedula.getText()) && NoVacia(data)) {
-            if (fecha.getCalendar().get(Calendar.DAY_OF_MONTH) <= LocalDate.now().getDayOfMonth()) {
+            //Datos del JDateChooser
+            int dia = fecha.getCalendar().get(Calendar.DAY_OF_MONTH);
+            int mes = fecha.getCalendar().get(Calendar.MONTH)+1;
+            int año = fecha.getCalendar().get(Calendar.YEAR);
+            //Datos de la fecha actual
+            int diaActual = LocalDate.now().getDayOfMonth();
+            int mesActual = LocalDate.now().getMonthValue();
+            int añoActual = LocalDate.now().getYear();
+            if (ValidarFecha(dia, diaActual, mes, mesActual, año, añoActual)) {
                 //Datos para crear el archivo de Clientes
                 String sDir = "C:\\user"; // direccion
                 File f = new File(sDir); // instancia de la carpeta
@@ -777,6 +785,18 @@ public class ClientInterface extends javax.swing.JFrame {
             }
         }
         archivo.delete();
+    }
+
+    //Valido la fecha del JDateChooser
+    private boolean ValidarFecha(int dia, int diaActual, int mes, int mesActual, int año, int añoActual) {
+        if (dia <= diaActual && mes <= mesActual && año <= añoActual) {
+            return true;
+        } else if (dia > diaActual && mes < mesActual && año <= añoActual) {
+            return true;
+        } else if (mes > mesActual && año < añoActual) {
+            return true;
+        }
+        return false;
     }
 
 }

@@ -60,6 +60,7 @@ public class AdminInterface extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         cardContent = new javax.swing.JPanel();
         adminCardTitle = new javax.swing.JPanel();
         adminTitle = new javax.swing.JLabel();
@@ -165,7 +166,7 @@ public class AdminInterface extends javax.swing.JFrame {
                 .addComponent(showDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(cardcontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cancelQuoteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(cancelQuoteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
         );
@@ -254,6 +255,8 @@ public class AdminInterface extends javax.swing.JFrame {
 
         jLabel7.setText("de 02:00 pm - 06:00 pm");
 
+        jLabel8.setText("Debe Ingresar una fecha mayor a la actual");
+
         javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
         content.setLayout(contentLayout);
         contentLayout.setHorizontalGroup(
@@ -281,6 +284,7 @@ public class AdminInterface extends javax.swing.JFrame {
                         .addContainerGap(32, Short.MAX_VALUE))
                     .addGroup(contentLayout.createSequentialGroup()
                         .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
                             .addComponent(jLabel7)
                             .addComponent(jLabel6))
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -293,11 +297,13 @@ public class AdminInterface extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(contentLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(bornDateTitle)
                             .addComponent(bornDateCollecter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(15, 15, 15)
                         .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -448,7 +454,7 @@ public class AdminInterface extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jButton3))
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(cardContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -661,20 +667,29 @@ public class AdminInterface extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int selected = jTable2.getSelectedRow();
         if (selected > -1) {
-            int Dia = 0, DiaActual = 0;
+            int dia = 0, diaActual = 0;
+            int mes = 0, mesActual = 0;
+            int año = 0, añoActual = 0;
             String nombreDia, date = null;
             boolean pass = true;
             try {
-                Dia = bornDateCollecter.getCalendar().get(Calendar.DAY_OF_MONTH);
+                //Recupero la fecha en el formato completo del JDateChooser
                 date = DateFormat.getDateInstance().format(bornDateCollecter.getDate());
-                DiaActual = LocalDate.now().getDayOfMonth();
+                //recupero los datos del JDateChooser
+                dia = bornDateCollecter.getCalendar().get(Calendar.DAY_OF_MONTH);
+                mes = bornDateCollecter.getCalendar().get(Calendar.MONTH)+1;
+                año = bornDateCollecter.getCalendar().get(Calendar.YEAR);
+                //Recupero los datos de la fecha actual
+                diaActual = LocalDate.now().getDayOfMonth();
+                mesActual = LocalDate.now().getMonthValue();
+                añoActual = LocalDate.now().getYear();
                 pass = true;
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(content, "Por favor coloque una fecha", "Error", JOptionPane.ERROR_MESSAGE);
                 pass = false;
             }
             if (pass) {
-                if (Dia > DiaActual) {
+                if (ValidarFecha(dia,diaActual,mes,mesActual,año,añoActual)) {//Valido que se ingrese una fecha mayor a la actual
                     nombreDia = String.valueOf(bornDateCollecter.getDate()).substring(0, 3);
                     if (nombreDia.equals("Sat") || nombreDia.equals("Sun")) {//Si el dia es sabado o domingo el veterinario no atiende esos 2 dias
                         JOptionPane.showMessageDialog(content, "Error", "El veterinario no atiende fines de semana", JOptionPane.ERROR_MESSAGE);
@@ -843,6 +858,7 @@ public class AdminInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
@@ -997,6 +1013,14 @@ public class AdminInterface extends javax.swing.JFrame {
             }
         }
         cambios.delete();
+    }
+
+    //Valido la fecha del JDateChooser
+    private boolean ValidarFecha(int dia, int diaActual, int mes, int mesActual, int año, int añoActual) {
+        if (dia > diaActual && mes >= mesActual && año >= añoActual) {
+            return true;
+        }
+        return false;
     }
 
 }
