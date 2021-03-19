@@ -1,6 +1,7 @@
 package Interfaces;
 
 import Login.Start;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.BufferedWriter;
@@ -398,8 +399,8 @@ public class ClientInterface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registryButtonActionPerformed
-        String data[] = {nombrePerro.getText(), raza.getText(), color.getText(), String.valueOf(fecha.getCalendar().get(Calendar.DATE))};
-        if (Esnumero(cedula.getText()) && NoVacia(data)) {
+        String data[] = {nombrePerro.getText(), raza.getText(), color.getText()};
+        if (Esnumero(cedula.getText()) && NoVacia(data) && IngresoFecha(fecha)) {
             //Datos del JDateChooser
             int dia = fecha.getCalendar().get(Calendar.DAY_OF_MONTH);
             int mes = fecha.getCalendar().get(Calendar.MONTH) + 1;
@@ -451,7 +452,7 @@ public class ClientInterface extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(content, "Error en la fecha de nacimiento", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(content, "Datos incorrectos, vuelva a intentarlo", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(content, "Por favor, debe ingresar todos los datos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_registryButtonActionPerformed
 
@@ -523,8 +524,8 @@ public class ClientInterface extends javax.swing.JFrame {
     private void SolicitarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SolicitarCitaActionPerformed
         int selected = jTable1.getSelectedRow();
         if (selected > -1) {
-            String data[] = {nombrePerro.getText(), raza.getText(), color.getText(), String.valueOf(fecha.getCalendar().get(Calendar.DATE))};
-            if (Esnumero(cedula.getText()) && NoVacia(data)) {
+            String data[] = {nombrePerro.getText(), raza.getText(), color.getText()};
+            if (Esnumero(cedula.getText()) && NoVacia(data) && IngresoFecha(fecha)) {
                 if (ClienteExiste(cedula.getText(), nombrePerro.getText())) {
                     //Datos del JDateChooser
                     int dia = fecha.getCalendar().get(Calendar.DAY_OF_MONTH);
@@ -834,4 +835,13 @@ public class ClientInterface extends javax.swing.JFrame {
         return false;
     }
 
+    private boolean IngresoFecha(JDateChooser date){
+        try{
+            String g = String.valueOf(date.getCalendar().get(Calendar.DATE));
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+    
 }
