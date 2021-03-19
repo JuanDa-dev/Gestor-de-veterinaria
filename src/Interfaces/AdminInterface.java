@@ -1,6 +1,7 @@
 package Interfaces;
 
 import Login.Start;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.BufferedWriter;
@@ -589,7 +590,7 @@ public class AdminInterface extends javax.swing.JFrame {
 
     private void reAsignButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reAsignButtonActionPerformed
         int selected = jTable2.getSelectedRow();
-        if (selected > -1 && !jTextField1.getText().equals("") && !String.valueOf(bornDateCollecter.getCalendar().get(Calendar.DAY_OF_MONTH)).isEmpty()) {
+        if (selected > -1 && !jTextField1.getText().equals("") && IngresoFecha(bornDateCollecter)) {
             int dia = bornDateCollecter.getCalendar().get(Calendar.DAY_OF_MONTH);
             int mes = bornDateCollecter.getCalendar().get(Calendar.MONTH) + 1;
             int año = bornDateCollecter.getCalendar().get(Calendar.YEAR);
@@ -597,7 +598,7 @@ public class AdminInterface extends javax.swing.JFrame {
             int diaActual = LocalDate.now().getDayOfMonth();
             int mesActual = LocalDate.now().getMonthValue();
             int añoActual = LocalDate.now().getYear();
-            if (ValidarFecha(dia,diaActual,mes,mesActual,año,añoActual)) {
+            if (ValidarFecha(dia, diaActual, mes, mesActual, año, añoActual)) {
                 //Datos para crear el archivo de Clientes
                 String sDir = "C:\\user"; // Ruta absoulta
                 File f = new File(sDir); // Instancia de la carpeta
@@ -640,6 +641,8 @@ public class AdminInterface extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(content, "Error inesperado", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(content, "Por favor coloque una fecha", "Error", JOptionPane.ERROR_MESSAGE);
         }
         jTextField1.setText("");
     }//GEN-LAST:event_reAsignButtonActionPerformed
@@ -676,12 +679,9 @@ public class AdminInterface extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int selected = jTable2.getSelectedRow();
         if (selected > -1) {
-            int dia = 0, diaActual = 0;
-            int mes = 0, mesActual = 0;
-            int año = 0, añoActual = 0;
-            String nombreDia, date = null;
-            boolean pass = true;
-            try {
+            int dia, diaActual, mes, mesActual, año, añoActual;
+            String nombreDia, date;
+            if (IngresoFecha(bornDateCollecter)) {
                 //Recupero la fecha en el formato completo del JDateChooser
                 date = DateFormat.getDateInstance().format(bornDateCollecter.getDate());
                 //recupero los datos del JDateChooser
@@ -692,12 +692,6 @@ public class AdminInterface extends javax.swing.JFrame {
                 diaActual = LocalDate.now().getDayOfMonth();
                 mesActual = LocalDate.now().getMonthValue();
                 añoActual = LocalDate.now().getYear();
-                pass = true;
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(content, "Por favor coloque una fecha", "Error", JOptionPane.ERROR_MESSAGE);
-                pass = false;
-            }
-            if (pass) {
                 if (ValidarFecha(dia, diaActual, mes, mesActual, año, añoActual)) {//Valido que se ingrese una fecha mayor a la actual
                     nombreDia = String.valueOf(bornDateCollecter.getDate()).substring(0, 3);
                     if (nombreDia.equals("Sat") || nombreDia.equals("Sun")) {//Si el dia es sabado o domingo el veterinario no atiende esos 2 dias
@@ -715,6 +709,8 @@ public class AdminInterface extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(content, "Ingrese un día después de hoy", "Error", JOptionPane.ERROR_MESSAGE);
                 }
+            } else {
+                JOptionPane.showMessageDialog(content, "Por favor coloque una fecha", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(content, "Debe seleccionar una cita", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1035,6 +1031,15 @@ public class AdminInterface extends javax.swing.JFrame {
             return true;
         }
         return false;
+    }
+
+    private boolean IngresoFecha(JDateChooser date) {
+        try {
+            String.valueOf(date.getCalendar().get(Calendar.DATE));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }
