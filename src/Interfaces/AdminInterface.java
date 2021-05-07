@@ -695,14 +695,14 @@ public class AdminInterface extends javax.swing.JFrame {
                 if (ValidarFecha(dia, diaActual, mes, mesActual, año, añoActual)) {//Valido que se ingrese una fecha mayor a la actual
                     nombreDia = String.valueOf(bornDateCollecter.getDate()).substring(0, 3);
                     if (nombreDia.equals("Sat") || nombreDia.equals("Sun")) {//Si el dia es sabado o domingo el veterinario no atiende esos 2 dias
-                        JOptionPane.showMessageDialog(content, "Error", "El veterinario no atiende fines de semana", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(content, "El veterinario no atiende fines de semana", "Error", JOptionPane.ERROR_MESSAGE);
                     } else {
                         String h = AsignarHora(date, "08", "00", "am", selected);
                         if (!h.equals("")) {
                             jTextField1.setText(h);
                             reAsignButton.setEnabled(true);
                         } else if (h.equals("")) {
-                            JOptionPane.showMessageDialog(content, "Error", "No hay horas disponible, ingrese otra fecha", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(content, "No hay horas disponible, ingrese otra fecha","Error", JOptionPane.ERROR_MESSAGE);
                             reAsignButton.setEnabled(false);
                         }
                     }

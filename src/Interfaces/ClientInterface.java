@@ -817,10 +817,10 @@ public class ClientInterface extends javax.swing.JFrame {
     private boolean ClienteExiste(String cedula, String nombre) {
         cliente = new File("C:\\user\\Clientes.txt");
         if (cliente.exists()) {
-            try (Scanner sc = new Scanner(cita)) {
+            try (Scanner sc = new Scanner(cliente)) {
                 while (sc.hasNextLine()) {
                     String linea = sc.nextLine();
-                    String data[] = linea.split(linea);
+                    String data[] = linea.split(",");
                     String ced = data[0];
                     String nom = data[1];
                     if (ced.equals(cedula) && nom.equals(nombre)) {
